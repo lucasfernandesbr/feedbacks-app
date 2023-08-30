@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 
 import axios from 'axios'
 
-import { Wrapper, Form, Box, Input, InputBox, Button } from './styles'
+import { Wrapper, Form, Title, Box, Input, Button } from './styles'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -13,7 +13,7 @@ type LoginProps = {
   children: React.ReactNode
 }
 
-const schema = z.object({ username: z.string() })
+const schema = z.object({ username: z.string(), password: z.string() })
 
 const githubSchema = z.object({
   name: z.string(),
@@ -63,19 +63,25 @@ export default function Login({ children }: LoginProps) {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit(handleFormSubmit)}>
-        <Box>
-          <Github color="#e0def4" size={24} />
+        <Github color="#e0def4" size={48} strokeWidth={2} />
 
-          <h3>Login using GitHub</h3>
+        <Box>
+          <Title>Sign In using GitHub</Title>
         </Box>
 
         <Input
           {...register('username')}
           type="text"
-          placeholder="Github username"
+          placeholder="Github Username"
         />
 
-        <Button type="submit">Login</Button>
+        <Input
+          {...register('password')}
+          type="password"
+          placeholder="Password"
+        />
+
+        <Button type="submit">Sign In</Button>
       </Form>
     </Wrapper>
   )

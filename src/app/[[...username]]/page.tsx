@@ -1,5 +1,4 @@
 import Console from '@/components/Console'
-import { Suspense } from 'react'
 
 type HomeProps = {
   params: {
@@ -8,9 +7,5 @@ type HomeProps = {
 }
 
 export default function User({ params }: HomeProps) {
-  return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <Console {...params} />
-    </Suspense>
-  )
+  return <Console {...params} />
 }

@@ -52,12 +52,22 @@ export const Feedbacks = styled.div`
 
   display: flex;
 
+  width: 100%;
+
   margin-top: 1.25rem;
+  padding-bottom: 0.8rem;
 
   gap: 0.8rem;
 
   &::-webkit-scrollbar {
-    display: none;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 6px;
+    background-color: rgba(73, 70, 112, 0.4);
+
+    border-radius: 10px;
   }
 `
 
@@ -72,8 +82,8 @@ export const FeedbackCard = styled.div`
 
   background-color: #232137;
 
-  width: 180px;
-  height: 280px;
+  width: 11.25rem;
+  height: 17.5rem;
 
   padding: 1.4rem;
 
