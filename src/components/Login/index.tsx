@@ -13,7 +13,10 @@ type LoginProps = {
   children: React.ReactNode
 }
 
-const schema = z.object({ username: z.string(), password: z.string() })
+const schema = z.object({
+  username: z.string().nonempty('Required field'),
+  password: z.string().nonempty('Required field'),
+})
 
 const githubSchema = z.object({
   name: z.string(),
@@ -69,11 +72,14 @@ export default function Login({ children }: LoginProps) {
           <Title>Sign In using GitHub</Title>
         </Box>
 
-        <Input
-          {...register('username')}
-          type="text"
-          placeholder="Github Username"
-        />
+        <>
+          <Input
+            {...register('username')}
+            type="text"
+            placeholder="Github Username"
+          />
+          {errors.username?.message}
+        </>
 
         <Input
           {...register('password')}

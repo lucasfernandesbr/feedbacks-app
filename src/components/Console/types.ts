@@ -1,5 +1,5 @@
 export type HeaderBallProps = {
-  color: string
+  color?: string
 }
 
 export type HeaderTabProps = {

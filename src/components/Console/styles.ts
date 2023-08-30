@@ -37,7 +37,7 @@ export const Header = styled.div`
   background-color: #232137;
 
   width: 100%;
-  height: 2.6rem;
+  height: 3rem;
 
   padding: 0 0.75rem;
 `
@@ -48,7 +48,7 @@ export const HeaderButtons = styled.div`
 `
 
 export const HeaderButton = styled.button<HeaderBallProps>`
-  background-color: ${({ color }) => color};
+  background-color: ${({ color }) => color || '#29273f'};
 
   width: 0.75rem;
   height: 0.75rem;
@@ -57,6 +57,22 @@ export const HeaderButton = styled.button<HeaderBallProps>`
   border-radius: 50%;
 
   cursor: pointer;
+`
+
+export const Logout = styled.div`
+  display: flex;
+  align-items: center;
+
+  gap: 0.5rem;
+
+  margin-right: 0.5rem;
+`
+
+export const LogoutLabel = styled.p`
+  font-size: 0.5rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
 `
 
 export const HeaderTabs = styled.div`
@@ -69,9 +85,13 @@ export const HeaderTabs = styled.div`
 `
 
 export const Tab = styled.button<HeaderTabProps>`
+  display: flex;
+  align-items: center;
+
+  gap: 0.4rem;
   background-color: ${({ active }) => (active ? '#29273f' : 'transparent')};
 
-  height: 2rem;
+  height: 2.4rem;
 
   padding: 0.4rem 0.6rem;
 

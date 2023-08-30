@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { User, Sparkle } from 'lucide-react'
 
 import Profile from '../Profile'
 import Login from '../Login'
@@ -10,6 +11,8 @@ import {
   Header,
   HeaderButtons,
   HeaderButton,
+  Logout,
+  LogoutLabel,
   HeaderTabs,
   Tab,
   Content,
@@ -52,18 +55,27 @@ export default function Console({ username }: ConsoleProps) {
     <Wrapper>
       <Header>
         <HeaderButtons>
-          <HeaderButton color="#ED6A5E" />
-          <HeaderButton color="#F4BF4F" />
-          <HeaderButton color="#61C454" />
+          <Logout>
+            <HeaderButton color="#ED6A5E" />
+
+            <LogoutLabel>logout</LogoutLabel>
+          </Logout>
+          <HeaderButton />
+          <HeaderButton />
         </HeaderButtons>
 
         <HeaderTabs>
           <Tab active={tab === 1 && true} onClick={() => handleTab(1)}>
+            <User color={tab === 1 && true ? '#e0def4' : '#908CAA'} size={16} />
             {!user ? 'Login' : 'Profile'}
           </Tab>
 
           {user && username && username !== user?.username && (
             <Tab active={tab === 2 && true} onClick={() => handleTab(2)}>
+              <Sparkle
+                color={tab === 2 && true ? '#e0def4' : '#908CAA'}
+                size={16}
+              />
               Give feedback
             </Tab>
           )}
