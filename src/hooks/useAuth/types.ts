@@ -1,9 +1,7 @@
 type User = {
-  id: string
   name: string
   username: string
   avatarUrl: string
-  location: string
   bio: string
 }
 
@@ -25,14 +23,6 @@ export type AuthProviderProps = {
 export type AuthStateProps = {
   user: User
   token: string
-}
-
-export type GithubUser = {
-  name: string
-  login: string
-  avatar_url: string
-  location: string
-  bio: string
 }
 
 export type AuthState = {

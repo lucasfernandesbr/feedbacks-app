@@ -9,7 +9,6 @@ import {
   AuthProviderProps,
   AuthStateProps,
   SignInCredentials,
-  GithubUser,
   AuthState,
 } from './types'
 
@@ -33,44 +32,17 @@ async function AuthProvider({ children }: AuthProviderProps) {
 
   const signIn = useCallback(
     async ({ username, password }: SignInCredentials) => {
-      const userExists: AuthState = await api.get(
-        `https://api.github.com/users/${username}`,
-      )
-
-      if (userExists) {
-        const { user, token } = userExists
-
-        localStorage.setItem('@feedbacks:user', JSON.stringify(userExists))
-        localStorage.setItem('@feedbacks:token', JSON.stringify(userExists))
-
-        api.defaults.headers.authorization = `Bearer ${token}`
-
-        setData({ user, token })
-        return
+      const signInPayload = {
+        username,
+        password,
       }
 
-      const githubUser: GithubUser = await api.get(
-        `https://api.github.com/users/${username}`,
-      )
-
-      const payload = {
-        name: githubUser.name,
-        username: githubUser.login,
-        // password,
-        avatarUrl: githubUser.avatar_url,
-        location: githubUser.location || '',
-        bio: githubUser.bio,
-      }
-
-      const createUser: AuthState = await api.post(
-        'https://feedbacks-api-yqkl.onrender.com/users',
-        payload,
-      )
+      const createUser: AuthState = await api.post('/session', signInPayload)
 
       const { user, token } = createUser
 
-      localStorage.setItem('@feedbacks:user', JSON.stringify(userExists))
-      localStorage.setItem('@feedbacks:token', JSON.stringify(userExists))
+      localStorage.setItem('@feedbacks:user', JSON.stringify(user))
+      localStorage.setItem('@feedbacks:token', JSON.stringify(token))
 
       api.defaults.headers.authorization = `Bearer ${token}`
 
