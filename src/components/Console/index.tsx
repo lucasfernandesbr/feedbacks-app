@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import api from '@/services/api'
 
+import Loading from '../Loading'
 import Login from '../Login'
 import Profile from '../Profile'
 import Feedback from '../Feedback'
@@ -58,7 +59,9 @@ export default function Console({ username }: ConsoleProps) {
       <ConsoleHeader username={username} tab={tab} handleTab={setTab} />
 
       <Content>
-        {loading && <h1>Loading...</h1>}
+        {loading && (
+          <Loading commandLine="~/feebacks-app" content="⏳ building content" />
+        )}
 
         {!user && loading === false && <Login>Login</Login>}
 
