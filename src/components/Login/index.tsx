@@ -1,13 +1,9 @@
-'use client'
-
-import { useState } from 'react'
 import { Github } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAuth } from '@/hooks/useAuth'
-import api from '@/services/api'
 
 import { Wrapper, Form, Title, Box, Input, Button } from './styles'
 

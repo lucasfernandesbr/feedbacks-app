@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useCallback, createContext, useContext } from 'react'
 
 import api from '@/services/api'
@@ -10,11 +8,12 @@ import {
   AuthStateProps,
   SignInCredentials,
   AuthState,
+  AxiosResponse,
 } from './types'
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
-async function AuthProvider({ children }: AuthProviderProps) {
+function AuthProvider({ children }: AuthProviderProps) {
   const [data, setData] = useState<AuthStateProps>(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const user = localStorage.getItem('@feedbacks:user')
@@ -37,12 +36,17 @@ async function AuthProvider({ children }: AuthProviderProps) {
         password,
       }
 
-      const createUser: AuthState = await api.post('/session', signInPayload)
+      const { data } = await api.post<AxiosResponse, AxiosResponse>(
+        '/session',
+        signInPayload,
+      )
+      const { user, token } = data
 
-      const { user, token } = createUser
+      const parsedUsed = JSON.stringify(user)
+      const parsedToken = JSON.stringify(token)
 
-      localStorage.setItem('@feedbacks:user', JSON.stringify(user))
-      localStorage.setItem('@feedbacks:token', JSON.stringify(token))
+      localStorage.setItem('@feedbacks:user', parsedUsed)
+      localStorage.setItem('@feedbacks:token', parsedToken)
 
       api.defaults.headers.authorization = `Bearer ${token}`
 
@@ -51,7 +55,7 @@ async function AuthProvider({ children }: AuthProviderProps) {
     [],
   )
 
-  const signOut = useCallback(async () => {
+  const signOut = useCallback(() => {
     localStorage.removeItem('@feedbacks:user')
     localStorage.removeItem('@feedbacks:token')
 
@@ -75,4 +79,4 @@ function useAuth(): AuthContextData {
   return context
 }
 
-export { AuthProvider, useAuth }
+export { AuthProvider, AuthContext, useAuth }

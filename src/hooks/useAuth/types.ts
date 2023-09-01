@@ -1,8 +1,16 @@
+type Feedback = {
+  id: string
+  user_id: string
+  pinned_by: string
+  content: string
+}
+
 type User = {
   name: string
   username: string
-  avatarUrl: string
+  avatar_url: string
   bio: string
+  feedbacks: Feedback[]
 }
 
 export type SignInCredentials = {
@@ -12,7 +20,7 @@ export type SignInCredentials = {
 
 export type AuthContextData = {
   user: User
-  signIn(credentials: SignInCredentials): Promise<void>
+  signIn(credentials: SignInCredentials): void
   signOut(): void
 }
 
@@ -28,4 +36,8 @@ export type AuthStateProps = {
 export type AuthState = {
   user: User
   token: string
+}
+
+export type AxiosResponse = {
+  data: AuthState
 }

@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 
 import Container from '@/components/Container'
-import { AuthProvider } from '@/hooks/useAuth'
 
+import { Providers } from './providers'
 import StyledComponentsRegistry from './lib/registry'
 
 const roboto = Roboto({ subsets: ['latin'], weight: '400' })
@@ -22,9 +22,9 @@ export default function RootLayout({
     <html lang="en" className={roboto.className}>
       <body>
         <StyledComponentsRegistry>
-          <AuthProvider>
+          <Providers>
             <Container>{children}</Container>
-          </AuthProvider>
+          </Providers>
         </StyledComponentsRegistry>
       </body>
     </html>

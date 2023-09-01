@@ -1,6 +1,3 @@
-/* eslint-disable camelcase */
-
-'use client'
 import {
   Avatar,
   UserInfo,
