@@ -17,14 +17,12 @@ import {
 
 import { ConsoleHeaderProps } from './types'
 
-export default function ConsoleHeader({ username }: ConsoleHeaderProps) {
+export default function ConsoleHeader({
+  username,
+  tab,
+  handleTab,
+}: ConsoleHeaderProps) {
   const { user, signOut } = useAuth()
-
-  const [tab, setTab] = useState(1)
-
-  const handleTab = (tab: number) => {
-    setTab(tab)
-  }
 
   return (
     <Header>
@@ -45,7 +43,7 @@ export default function ConsoleHeader({ username }: ConsoleHeaderProps) {
           {!user ? 'Login' : 'Profile'}
         </Tab>
 
-        {user && username && username !== user?.username && (
+        {user && username && username[0] !== user.username && (
           <Tab isactive={!!(tab === 2)} onClick={() => handleTab(2)}>
             <Sparkle
               color={tab === 2 && true ? '#e0def4' : '#908CAA'}

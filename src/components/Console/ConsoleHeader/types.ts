@@ -1,5 +1,7 @@
 export type ConsoleHeaderProps = {
   username: string
+  tab: number
+  handleTab: (tab: number) => void
 }
 
 export type HeaderBallProps = {
