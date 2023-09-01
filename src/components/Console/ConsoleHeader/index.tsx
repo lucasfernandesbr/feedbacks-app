@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { User, Sparkle } from 'lucide-react'
 
 import { useAuth } from '@/hooks/useAuth'
