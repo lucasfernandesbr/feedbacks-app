@@ -20,7 +20,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       const token = localStorage.getItem('@feedbacks:token')
 
       if (token && user) {
-        api.defaults.headers.authorization = `Bearer ${token}`
+        api.defaults.headers.authorization = `Bearer ${JSON.parse(token)}`
 
         return { token, user: JSON.parse(user) }
       }
@@ -48,7 +48,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem('@feedbacks:user', parsedUsed)
       localStorage.setItem('@feedbacks:token', parsedToken)
 
-      api.defaults.headers.authorization = `Bearer ${token}`
+      api.defaults.headers.authorization = `Bearer ${JSON.parse(token)}`
 
       setData({ user, token })
     },
@@ -63,7 +63,9 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, token: data.token, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   )

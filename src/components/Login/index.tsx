@@ -5,7 +5,9 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAuth } from '@/hooks/useAuth'
 
-import { Wrapper, Form, Title, Box, Input, Button } from './styles'
+import Input from '@/components/Input'
+
+import { Wrapper, Form, Title, Box, Button } from './styles'
 
 type LoginProps = {
   children: React.ReactNode
@@ -44,6 +46,7 @@ export default function Login({ children }: LoginProps) {
         <>
           <Input
             {...register('username')}
+            name="username"
             type="text"
             placeholder="Github Username"
           />

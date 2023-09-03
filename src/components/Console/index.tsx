@@ -69,7 +69,9 @@ export default function Console({ username }: ConsoleProps) {
           <Profile content={profile} />
         )}
 
-        {user && loading === false && tab === 2 && <Feedback />}
+        {user && loading === false && tab === 2 && (
+          <Feedback username={username} />
+        )}
       </Content>
     </Wrapper>
   )

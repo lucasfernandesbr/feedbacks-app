@@ -20,6 +20,7 @@ export type SignInCredentials = {
 
 export type AuthContextData = {
   user: User
+  token: string
   signIn(credentials: SignInCredentials): void
   signOut(): void
 }
