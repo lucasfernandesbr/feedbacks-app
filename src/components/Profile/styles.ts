@@ -157,8 +157,6 @@ export const FeedbackDescription = styled.p`
   overflow: hidden;
   overflow-y: scroll;
 
-  word-break: break-all;
-
   &::-webkit-scrollbar {
     display: none;
   }
