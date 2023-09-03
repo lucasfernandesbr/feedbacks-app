@@ -14,7 +14,3 @@ export type User = {
   bio: string
   feedbacks: Feedback[]
 }
-
-export type ConsoleProps = {
-  username: string
-}

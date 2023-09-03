@@ -60,23 +60,3 @@ export const Input = styled.input`
     color: ${lighten(0.15, '#29273f')};
   }
 `
-
-export const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 3.125rem;
-
-  background: ${lighten(0.05, '#29273f')};
-
-  border: none;
-  border-radius: 0.3rem;
-
-  cursor: pointer;
-
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #e0def4;
-`

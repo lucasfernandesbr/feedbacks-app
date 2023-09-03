@@ -42,20 +42,9 @@ export const Logout = styled.button<HeaderBallProps>`
 
   gap: 0.5rem;
 
-  margin-right: 0.5rem;
-
   border: none;
 
   cursor: pointer;
-`
-
-export const LogoutLabel = styled.p`
-  font-size: 0.5rem;
-  font-weight: 700;
-
-  color: #e0def4;
-
-  text-transform: uppercase;
 `
 
 export const HeaderTabs = styled.div`
@@ -68,11 +57,13 @@ export const HeaderTabs = styled.div`
 `
 
 export const Tab = styled.button<HeaderTabProps>`
+  position: relative;
   display: flex;
   align-items: center;
 
   gap: 0.4rem;
-  background-color: ${({ isactive }) => (isactive ? '#29273f' : 'transparent')};
+  background-color: ${({ $isActive }) =>
+    $isActive ? '#29273f' : 'transparent'};
 
   height: 2.4rem;
 
@@ -85,8 +76,8 @@ export const Tab = styled.button<HeaderTabProps>`
   font-size: 0.75rem;
 
   cursor: pointer;
-  color: ${({ isactive }) => (isactive ? '#e0def4' : '#908CAA')};
-  font-weight: ${({ isactive }) => (isactive ? 700 : 400)};
+  color: ${({ $isActive }) => ($isActive ? '#e0def4' : '#908CAA')};
+  font-weight: ${({ $isActive }) => ($isActive ? 700 : 400)};
 
   transition: background-color 0.2s ease-in-out;
 

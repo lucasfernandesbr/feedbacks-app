@@ -6,9 +6,11 @@ import { useAuth } from '@/hooks/useAuth'
 
 import Input from '@/components/Input'
 import Textarea from '@/components/Textarea'
+import Button from '@/components/Button'
 
-import { Wrapper, Form, FormContent, Title, Box, Button } from './styles'
+import { Wrapper, Form, FormContent, Title, Box } from './styles'
 import api from '@/services/api'
+import { User } from './types'
 
 type LoginProps = {
   username: string
@@ -23,12 +25,12 @@ const feedbackSchema = z.object({
 export default function Feedback({ username }: LoginProps) {
   type FeedbackData = z.infer<typeof feedbackSchema>
 
-  const { user, token } = useAuth()
+  const { user, setUserAuthState } = useAuth()
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isSubmitting },
   } = useForm<FeedbackData>({
     resolver: zodResolver(feedbackSchema),
   })
@@ -41,6 +43,10 @@ export default function Feedback({ username }: LoginProps) {
       content: data.content,
       type: data.type,
     })
+
+    const getUser = await api.get<User, User>(`/users/username/${username}`)
+
+    setUserAuthState(getUser)
   }
 
   return (
@@ -71,7 +77,9 @@ export default function Feedback({ username }: LoginProps) {
           </Box>
         </FormContent>
 
-        <Button type="submit">Give feedback!</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          Give feedback!
+        </Button>
       </Form>
     </Wrapper>
   )

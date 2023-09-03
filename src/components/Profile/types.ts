@@ -1,12 +1,14 @@
 export type FeedbackTagProps = {
-  color: string
+  type: string
 }
 
 type Feedback = {
   id: string
   user_id: string
   pinned_by: string
+  title: string
   content: string
+  type: string
 }
 
 export type User = {

@@ -29,7 +29,7 @@ export const Content = styled.div`
   overflow: hidden;
   overflow-y: scroll;
 
-  height: calc(100% - 1.8rem);
+  height: calc(100% - 3rem);
 
   padding: 1.5rem 2.5rem;
 

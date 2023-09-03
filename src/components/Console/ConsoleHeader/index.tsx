@@ -1,6 +1,7 @@
 'use client'
 
 import { User, Sparkle } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 import { useAuth } from '@/hooks/useAuth'
 
@@ -9,7 +10,6 @@ import {
   HeaderButtons,
   HeaderBall,
   Logout,
-  LogoutLabel,
   HeaderTabs,
   Tab,
 } from './styles'
@@ -22,36 +22,42 @@ export default function ConsoleHeader({
   handleTab,
 }: ConsoleHeaderProps) {
   const { user, signOut } = useAuth()
+  const { push } = useRouter()
+
+  const handleSignOut = () => {
+    signOut()
+    push('/')
+  }
 
   return (
     <Header>
       <HeaderButtons>
-        <Logout type="button" onClick={signOut}>
+        <Logout type="button" onClick={handleSignOut}>
           <HeaderBall color="#ED6A5E" />
-
-          <LogoutLabel>logout</LogoutLabel>
         </Logout>
 
         <HeaderBall />
         <HeaderBall />
       </HeaderButtons>
 
-      <HeaderTabs>
-        <Tab isactive={!!(tab === 1)} onClick={() => handleTab(1)}>
-          <User color={tab === 1 && true ? '#e0def4' : '#908CAA'} size={16} />
-          {!user ? 'Login' : 'Profile'}
-        </Tab>
-
-        {user && username && username[0] !== user.username && (
-          <Tab isactive={!!(tab === 2)} onClick={() => handleTab(2)}>
-            <Sparkle
-              color={tab === 2 && true ? '#e0def4' : '#908CAA'}
-              size={16}
-            />
-            Give feedback
+      {user && (
+        <HeaderTabs>
+          <Tab $isActive={tab === 1} onClick={() => handleTab(1)}>
+            <User color={tab === 1 && true ? '#e0def4' : '#908CAA'} size={16} />
+            {'Profile'}
           </Tab>
-        )}
-      </HeaderTabs>
+
+          {username && username[0] !== user.username && (
+            <Tab $isActive={tab === 2} onClick={() => handleTab(2)}>
+              <Sparkle
+                color={tab === 2 && true ? '#e0def4' : '#908CAA'}
+                size={16}
+              />
+              Give feedback
+            </Tab>
+          )}
+        </HeaderTabs>
+      )}
     </Header>
   )
 }

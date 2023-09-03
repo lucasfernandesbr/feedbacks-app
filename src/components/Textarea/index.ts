@@ -5,7 +5,7 @@ const Textarea = styled.textarea`
   resize: none;
 
   width: 100%;
-  min-width: 320px;
+  max-width: 360px;
   height: 100%;
 
   padding: 1rem;
@@ -21,9 +21,8 @@ const Textarea = styled.textarea`
 
   &::placeholder {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1.2px;
     color: ${lighten(0.05, '#29273f')};
   }
 
@@ -37,6 +36,12 @@ const Textarea = styled.textarea`
     background-color: rgba(73, 70, 112, 0.4);
 
     border-radius: 10px;
+  }
+
+  @media (min-width: 1024px) {
+    &::placeholder {
+      font-size: 12px;
+    }
   }
 `
 

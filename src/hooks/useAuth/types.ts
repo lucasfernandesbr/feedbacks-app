@@ -2,10 +2,12 @@ type Feedback = {
   id: string
   user_id: string
   pinned_by: string
+  title: string
   content: string
+  type: string
 }
 
-type User = {
+export type User = {
   name: string
   username: string
   avatar_url: string
@@ -18,13 +20,6 @@ export type SignInCredentials = {
   password: string
 }
 
-export type AuthContextData = {
-  user: User
-  token: string
-  signIn(credentials: SignInCredentials): void
-  signOut(): void
-}
-
 export type AuthProviderProps = {
   children: React.ReactNode
 }
@@ -32,6 +27,14 @@ export type AuthProviderProps = {
 export type AuthStateProps = {
   user: User
   token: string
+}
+
+export type AuthContextData = {
+  user: User
+  token: string
+  setUserAuthState(stateData: User): void
+  signIn(credentials: SignInCredentials): void
+  signOut(): void
 }
 
 export type AuthState = {

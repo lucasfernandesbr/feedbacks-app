@@ -10,12 +10,13 @@ import {
   FeedbackStopIcon,
   FeedbackTitle,
   FeedbackDescription,
+  FeedbacksEmpty,
 } from './styles'
 
 import { ProfileProps } from './types'
 
 export default function Profile({ content }: ProfileProps) {
-  const { avatar_url, username, name, bio } = content
+  const { avatar_url, username, name, bio, feedbacks } = content
 
   return (
     <>
@@ -29,91 +30,25 @@ export default function Profile({ content }: ProfileProps) {
         </UserData>
       </UserInfo>
 
-      <Feedbacks>
-        <FeedbackCard>
-          <FeedbackTag color="#84E5B4">Keep doing</FeedbackTag>
+      {feedbacks.length === 0 ? (
+        <FeedbacksEmpty>🚀 No feedbacks registered yet</FeedbacksEmpty>
+      ) : (
+        <Feedbacks>
+          {feedbacks.map(({ title, type, content }, index) => (
+            <FeedbackCard key={`${index}`}>
+              {type === 'keep' && <FeedbackKeepIcon />}
+              {type === 'start' && <FeedbackStartIcon />}
+              {type === 'stop' && <FeedbackStopIcon />}
 
-          <FeedbackKeepIcon />
+              <FeedbackTag type={type}>Keep doing</FeedbackTag>
 
-          <FeedbackTitle>Feedbacks</FeedbackTitle>
-          <FeedbackDescription>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </FeedbackDescription>
-        </FeedbackCard>
+              <FeedbackTitle>{title}</FeedbackTitle>
 
-        <FeedbackCard>
-          <FeedbackTag color="#84E5B4">Keep doing</FeedbackTag>
-
-          <FeedbackKeepIcon />
-
-          <FeedbackTitle>Feedbacks</FeedbackTitle>
-          <FeedbackDescription>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </FeedbackDescription>
-        </FeedbackCard>
-
-        <FeedbackCard>
-          <FeedbackTag color="#f0bc69">Start doing</FeedbackTag>
-
-          <FeedbackStartIcon />
-
-          <FeedbackTitle>Feedbacks</FeedbackTitle>
-          <FeedbackDescription>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </FeedbackDescription>
-        </FeedbackCard>
-
-        <FeedbackCard>
-          <FeedbackTag color="#f0bc69">Start doing</FeedbackTag>
-
-          <FeedbackStartIcon />
-
-          <FeedbackTitle>Feedbacks</FeedbackTitle>
-          <FeedbackDescription>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </FeedbackDescription>
-        </FeedbackCard>
-
-        <FeedbackCard>
-          <FeedbackTag color="#E56A6A">Stop doing</FeedbackTag>
-
-          <FeedbackStopIcon />
-
-          <FeedbackTitle>Feedbacks</FeedbackTitle>
-          <FeedbackDescription>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </FeedbackDescription>
-        </FeedbackCard>
-
-        <FeedbackCard>
-          <FeedbackTag color="#E56A6A">Stop doing</FeedbackTag>
-
-          <FeedbackStopIcon />
-
-          <FeedbackTitle>Feedbacks</FeedbackTitle>
-          <FeedbackDescription>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </FeedbackDescription>
-        </FeedbackCard>
-      </Feedbacks>
+              <FeedbackDescription>{content}</FeedbackDescription>
+            </FeedbackCard>
+          ))}
+        </Feedbacks>
+      )}
     </>
   )
 }

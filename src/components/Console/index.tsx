@@ -41,7 +41,7 @@ export default function Console({ username }: ConsoleProps) {
   useEffect(() => {
     setLoading(true)
 
-    if (username && username !== user.username) {
+    if (user && username && username !== user.username) {
       getProfile().then((response) => {
         setProfile(response)
         setLoading(false)
@@ -56,14 +56,19 @@ export default function Console({ username }: ConsoleProps) {
 
   return (
     <Wrapper>
-      <ConsoleHeader username={username} tab={tab} handleTab={setTab} />
+      <ConsoleHeader
+        username={username}
+        tab={tab}
+        handleTab={setTab}
+        isLoading={loading}
+      />
 
       <Content>
         {loading && (
           <Loading commandLine="~/feebacks-app" content="⏳ building content" />
         )}
 
-        {!user && loading === false && <Login>Login</Login>}
+        {!user && !profile && loading === false && <Login />}
 
         {user && profile && loading === false && tab === 1 && (
           <Profile content={profile} />

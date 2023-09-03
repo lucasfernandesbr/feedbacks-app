@@ -5,7 +5,7 @@ const Input = styled.input`
   display: flex;
 
   width: 100%;
-  min-width: 320px;
+  max-width: 360px;
   height: 56px;
 
   padding: 1rem;
@@ -19,10 +19,15 @@ const Input = styled.input`
 
   &::placeholder {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 1.2px;
     color: ${lighten(0.05, '#29273f')};
+  }
+
+  @media (min-width: 1024px) {
+    &::placeholder {
+      font-size: 12px;
+    }
   }
 `
 

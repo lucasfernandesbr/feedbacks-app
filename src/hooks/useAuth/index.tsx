@@ -1,4 +1,10 @@
-import { useState, useCallback, createContext, useContext } from 'react'
+import {
+  useState,
+  useCallback,
+  createContext,
+  useContext,
+  useEffect,
+} from 'react'
 
 import api from '@/services/api'
 
@@ -9,25 +15,19 @@ import {
   SignInCredentials,
   AuthState,
   AxiosResponse,
+  User,
 } from './types'
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [data, setData] = useState<AuthStateProps>(() => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const user = localStorage.getItem('@feedbacks:user')
-      const token = localStorage.getItem('@feedbacks:token')
-
-      if (token && user) {
-        api.defaults.headers.authorization = `Bearer ${JSON.parse(token)}`
-
-        return { token, user: JSON.parse(user) }
-      }
-    }
-
     return {} as AuthStateProps
   })
+
+  const setUserAuthState = (stateData: User) => {
+    setData({ user: stateData, token: data.token })
+  }
 
   const signIn = useCallback(
     async ({ username, password }: SignInCredentials) => {
@@ -48,8 +48,6 @@ function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem('@feedbacks:user', parsedUsed)
       localStorage.setItem('@feedbacks:token', parsedToken)
 
-      api.defaults.headers.authorization = `Bearer ${JSON.parse(token)}`
-
       setData({ user, token })
     },
     [],
@@ -62,9 +60,28 @@ function AuthProvider({ children }: AuthProviderProps) {
     setData({} as AuthState)
   }, [])
 
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const user = localStorage.getItem('@feedbacks:user')
+      const token = localStorage.getItem('@feedbacks:token')
+
+      if (token && user) {
+        api.defaults.headers.authorization = `Bearer ${JSON.parse(token)}`
+
+        setData({ user: JSON.parse(user), token })
+      }
+    }
+  }, [])
+
   return (
     <AuthContext.Provider
-      value={{ user: data.user, token: data.token, signIn, signOut }}
+      value={{
+        user: data.user,
+        token: data.token,
+        setUserAuthState,
+        signIn,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

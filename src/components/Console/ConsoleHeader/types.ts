@@ -2,6 +2,7 @@ export type ConsoleHeaderProps = {
   username: string
   tab: number
   handleTab: (tab: number) => void
+  isLoading: boolean
 }
 
 export type HeaderBallProps = {
@@ -9,5 +10,5 @@ export type HeaderBallProps = {
 }
 
 export type HeaderTabProps = {
-  isactive?: boolean
+  $isActive?: boolean
 }

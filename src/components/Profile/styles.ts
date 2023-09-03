@@ -4,6 +4,18 @@ import { Sparkles, Coffee, XOctagon } from 'lucide-react'
 
 import { FeedbackTagProps } from './types'
 
+type Colors = {
+  keep: string
+  start: string
+  stop: string
+}
+
+const cardTagColor: Colors = {
+  keep: '#84E5B4',
+  start: '#f0bc69',
+  stop: '#E56A6A',
+}
+
 export const Avatar = styled.img`
   width: 140px;
   height: 140px;
@@ -51,6 +63,8 @@ export const Feedbacks = styled.div`
   overflow-x: scroll;
 
   display: flex;
+  align-items: center;
+  justify-content: start;
 
   width: 100%;
 
@@ -69,6 +83,11 @@ export const Feedbacks = styled.div`
 
     border-radius: 10px;
   }
+
+  @media (min-width: 1024px) {
+    justify-content: start;
+    align-items: center;
+  }
 `
 
 export const FeedbackCard = styled.div`
@@ -83,7 +102,7 @@ export const FeedbackCard = styled.div`
   background-color: #232137;
 
   width: 11.25rem;
-  height: 17.5rem;
+  height: 16.7rem;
 
   padding: 1.4rem;
 
@@ -96,7 +115,8 @@ export const FeedbackTag = styled.div<FeedbackTagProps>`
   justify-content: center;
   flex-shrink: 0;
 
-  background-color: ${({ color }) => color};
+  background-color: ${({ type }) =>
+    type ? cardTagColor[type as keyof Colors] : type};
 
   width: max-content;
   height: 20px;
@@ -111,21 +131,21 @@ export const FeedbackTag = styled.div<FeedbackTagProps>`
 `
 
 export const FeedbackKeepIcon = styled(Sparkles).attrs({
-  color: '#e0def4',
+  color: cardTagColor.keep,
   size: 36,
 })`
   flex-shrink: 0;
 `
 
 export const FeedbackStartIcon = styled(Coffee).attrs({
-  color: '#e0def4',
+  color: cardTagColor.start,
   size: 36,
 })`
   flex-shrink: 0;
 `
 
 export const FeedbackStopIcon = styled(XOctagon).attrs({
-  color: '#e0def4',
+  color: cardTagColor.stop,
   size: 36,
 })`
   flex-shrink: 0;
@@ -137,7 +157,22 @@ export const FeedbackDescription = styled.p`
   overflow: hidden;
   overflow-y: scroll;
 
+  word-break: break-all;
+
   &::-webkit-scrollbar {
     display: none;
   }
+`
+
+export const FeedbacksEmpty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: calc(100% - 244px);
+
+  font-size: 3em;
+  font-weight: 700;
+
+  text-align: center;
 `

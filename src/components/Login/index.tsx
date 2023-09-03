@@ -1,3 +1,5 @@
+'use client'
+
 import { Github } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -6,25 +8,22 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useAuth } from '@/hooks/useAuth'
 
 import Input from '@/components/Input'
+import Button from '@/components/Button'
 
-import { Wrapper, Form, Title, Box, Button } from './styles'
-
-type LoginProps = {
-  children: React.ReactNode
-}
+import { Wrapper, Form, Title, Box } from './styles'
 
 const signInCredentials = z.object({
   username: z.string().nonempty('Required field'),
   password: z.string().nonempty('Required field'),
 })
 
-export default function Login({ children }: LoginProps) {
+export default function Login() {
   type SignInCredentials = z.infer<typeof signInCredentials>
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<SignInCredentials>({
     resolver: zodResolver(signInCredentials),
   })
@@ -59,7 +58,9 @@ export default function Login({ children }: LoginProps) {
           placeholder="Password"
         />
 
-        <Button type="submit">Sign In</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          Sign In
+        </Button>
       </Form>
     </Wrapper>
   )

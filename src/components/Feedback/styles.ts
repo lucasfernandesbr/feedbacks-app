@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { lighten } from 'polished'
 
 export const Wrapper = styled.div`
   overflow: hidden;
@@ -26,42 +25,47 @@ export const Form = styled.form`
   justify-content: center;
   flex-direction: column;
 
+  width: 100%;
+
   gap: 2rem;
+
+  @media (min-width: 1024px) {
+    height: 100%;
+  }
 `
 
 export const FormContent = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
 
   gap: 1rem;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    max-width: 738px;
+    max-height: 128px;
+  }
 `
 
 export const Title = styled.h3`
   font-size: 1.6rem;
+
+  text-align: center;
 `
 
 export const Box = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
-
-export const Button = styled.button`
-  display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   width: 100%;
-  max-width: 360px;
-  height: 3.125rem;
+  height: 100%;
 
-  background: ${lighten(0.05, '#29273f')};
-
-  border: none;
-  border-radius: 0.3rem;
-
-  cursor: pointer;
-
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #e0def4;
+  gap: 1rem;
 `
