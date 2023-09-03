@@ -31,6 +31,8 @@ export const Form = styled.form`
 
 export const Title = styled.h3`
   font-size: 1.6rem;
+
+  text-align: center;
 `
 
 export const Box = styled.div`
