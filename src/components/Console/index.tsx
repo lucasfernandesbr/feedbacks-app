@@ -46,6 +46,7 @@ export default function Console({ username }: ConsoleProps) {
   }, [user])
 
   useEffect(() => {
+    console.log(username)
     setLoading(true)
 
     if (

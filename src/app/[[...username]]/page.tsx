@@ -7,5 +7,5 @@ type HomeProps = {
 }
 
 export default function User({ params }: HomeProps) {
-  return <Console {...params} />
+  return <Console username={params.username} />
 }
