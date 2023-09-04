@@ -46,7 +46,6 @@ export default function Console({ username }: ConsoleProps) {
   }, [user])
 
   useEffect(() => {
-    console.log(username[0])
     setLoading(true)
 
     if (
@@ -55,6 +54,7 @@ export default function Console({ username }: ConsoleProps) {
       username[0] !== user.username &&
       username[0] !== 'index'
     ) {
+      console.log(username[0])
       getProfile().then((response) => {
         setProfile(response)
         setLoading(false)
