@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { useAuth } from '@/hooks/useAuth'
 import api from '@/services/api'
@@ -18,16 +19,22 @@ import { ConsoleProps, User } from './types'
 
 export default function Console({ username }: ConsoleProps) {
   const { user } = useAuth()
+  const { push } = useRouter()
 
   const [loading, setLoading] = useState(true)
   const [profile, setProfile] = useState<User>({} as User)
   const [tab, setTab] = useState(1)
 
   const getProfile: () => Promise<User> = useCallback(async () => {
-    const { data } = await api.get(`/users/username/${username}`)
+    try {
+      const { data } = await api.get(`/users/username/${username}`)
 
-    return data
-  }, [username])
+      return data
+    } catch (err) {
+      setLoading(false)
+      push('/')
+    }
+  }, [push, username])
 
   useEffect(() => {
     if (!user) {
