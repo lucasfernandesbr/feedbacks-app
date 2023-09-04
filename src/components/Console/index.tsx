@@ -54,7 +54,6 @@ export default function Console({ username }: ConsoleProps) {
       username[0] !== user.username &&
       username[0] !== 'index'
     ) {
-      console.log(username[0])
       getProfile().then((response) => {
         setProfile(response)
         setLoading(false)
